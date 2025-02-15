@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  snmp_generator:
+    image: "prom/snmp-generator:latest"
+    container_name: snmp_generator
+    # restart: always
+    ports:
+      - "161:161"  # Exposes SNMP port
+    volumes:
+      # - ./generator.yml:/etc/snmp-generator/config.yml  # Configuration for SNMP generator
+      # - ./mibs:/mibs  # Mount MIB files here
+      - ./opt:/opt/ # Mount MIB files here
+    environment:
+      - MIB_PATH=/mibs  # Define MIB directory in environment variable
+    # networks:
+    #   - prometheus
+
+  # snmp_exporter:
+  #   image: prom/snmp-exporter:latest
+  #   container_name: snmp_exporter
+  #   restart: always
+  #   ports:
+  #     - "9116:9116"  # Exposes the SNMP exporter port
+  #   volumes:
+  #     - ./snmp.yml:/etc/snmp_exporter/snmp.yml  # SNMP Exporter configuration
+  #     - ./mibs:/mibs  # Mount MIBs to this path
+  #   environment:
+  #     - MIB_PATH=/mibs  # Define MIB directory in environment variable
+  #   networks:
+  #     - prometheus
+
+# networks:
+#   prometheus:
+#     external: true  # Prometheus external network if using
