@@ -10,7 +10,7 @@ services:
     volumes:
       # - ./generator.yml:/etc/snmp-generator/config.yml  # Configuration for SNMP generator
       # - ./mibs:/mibs  # Mount MIB files here
-      - ./opt:/opt/ # Mount MIB files here
+      - ./snmp/:/opt/ # Mount MIB files here
     environment:
       - MIB_PATH=/mibs  # Define MIB directory in environment variable
     # networks:

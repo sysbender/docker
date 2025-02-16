@@ -1,0 +1,11 @@
+  snmp_exporter:
+    image: prom/snmp-exporter:latest
+    container_name: snmp_exporter
+    restart: always
+    ports:
+      - "9116:9116"  # Exposes the SNMP exporter port
+    volumes:
+      - ./snmp.yml:/etc/snmp_exporter/snmp.yml  # SNMP Exporter configuration
+      - ./mibs:/mibs  # Mount MIBs to this path
+    environment:
+      - MIB_PATH=/mibs  # Define MIB directory in environment variable
