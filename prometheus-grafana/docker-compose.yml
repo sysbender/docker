@@ -13,6 +13,8 @@ services:
     #   - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
       - ./grafana/provisioning/:/etc/grafana/provisioning/
+      # - ./mnt/grafana-data:/var/lib/grafana
+      - grafana_data:/var/lib/grafana
 
   prometheus:
     image: prom/prometheus
@@ -26,23 +28,28 @@ services:
     restart: unless-stopped
     volumes:
       - ./prometheus:/etc/prometheus
+      # - ./mnt/prometheus-data:/prometheus
       - prom_data:/prometheus
 
-
-      
-volumes:
-  prom_data:
-
-
   snmp_exporter:
-    image: prom/snmp-exporter
-    container_name: mk_snmp_exporter
-    restart: always
+    image: prom/snmp-exporter:v0.26.0
+    container_name: snmp_exporter
+    command:
+      - '--config.file=/etc/snmp_exporter/snmp.yml'
+    restart: unless-stopped
     volumes:
       - ./snmp/:/etc/snmp_exporter/
     ports:
       - "9116:9116"
+      - "161:161/udp"
     depends_on:
       - prometheus
+      
+volumes:
+  prom_data:
+  grafana_data:
+
+
+
 
     
