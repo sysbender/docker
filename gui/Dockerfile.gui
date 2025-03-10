@@ -1,0 +1,8 @@
+FROM alpine
+RUN apk add --no-cache pcmanfm ffmpeg font-opensans adwaita-icon-theme mpv
+COPY SampleVideo_360x240_1mb.mp4 /
+
+# ENV DISPLAY=:0
+# ENV PULSE_SERVER=/tmp/PulseServer
+
+CMD pcmanfm 
