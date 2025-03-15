@@ -16,3 +16,22 @@ ENTRYPOINT  [ "/bin/snmp_exporter" ]
 CMD         [ "--config.file=/etc/snmp_exporter/snmp.yml" ]
 '''
 
+### grafana
+
+
+#### Grafana Dashboard ####
+Total Traffic
+sum(irate(ifHCInOctets{instance="$Device"}[$__rate_interval]) * 8)
+sum(irate(ifHCOutOctets{instance="$Device"}[$__rate_interval]) * 8)
+
+IN & OUT per interface
+irate(ifHCInOctets{instance="192.168.0.84",ifIndex="2"}[$__rate_interval]) * 8
+irate(ifHCOutOctets{instance="192.168.0.84",ifIndex="2"}[$__rate_interval]) * 8
+
+Uptime
+sysUpTime{instance="$Device"} * 10
+
+System name
+sysName{instance="$Device"}
+
+

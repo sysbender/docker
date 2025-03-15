@@ -98,7 +98,7 @@ networks:
   local_network:
     driver: macvlan
     driver_opts:
-      parent: eth0
+      parent: eth1
     ipam:
       config:
         - subnet: ${NETWORK}

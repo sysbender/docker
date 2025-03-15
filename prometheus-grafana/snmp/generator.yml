@@ -9,13 +9,23 @@ modules:
   # SNMPv2-MIB for things like sysDescr, sysUpTime, etc.
   system:
     walk:
-      - "SNMPv2-MIB::system"
+      # - "SNMPv2-MIB::system"
+      - sysName
+      - sysUpTime
+      - interfaces
+      - ifXTable
+      - ifHCInOctets
+      - ifHCOutOctets
+      - ifInErrors
+      - ifOutErrors
     lookups:
       - source_indexes: [sysORIndex]
         lookup: "SNMPv2-MIB::sysORDescr"
   # Default IF-MIB interfaces table with ifIndex.
   if_mib:
     walk:
+      - sysName
+      - sysUpTime
       - "IF-MIB::interfaces"
       - "IF-MIB::ifXTable"
       - ifHCInOctets
