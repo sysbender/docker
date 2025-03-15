@@ -1,0 +1,14 @@
+# Start from the x11docker LXQt image
+FROM x11docker/lxqt
+
+# Set environment variables to avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package list and install Linphone
+RUN apt-get update && apt-get install -y \
+    linphone \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set default command to start the LXQt desktop and Linphone
+CMD linphone &

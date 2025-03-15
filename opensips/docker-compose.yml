@@ -87,8 +87,30 @@ services:
 volumes:
   mysql_data:
 
+# networks:
+#   local_network:
+#     ipam:
+#       config:
+#         - subnet: ${NETWORK}
+
+
 networks:
   local_network:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
     ipam:
       config:
         - subnet: ${NETWORK}
+          gateway: ${GATEWAY}
+
+
+# networks:
+#   my_macvlan:
+#     driver: macvlan
+#     driver_opts:
+#       parent: eth0  # Change this to match your host's network interface
+#     ipam:
+#       config:
+#         - subnet: 192.168.1.0/24  # Adjust this to your network
+#           gateway: 192.168.1.1  # Set the correct gateway

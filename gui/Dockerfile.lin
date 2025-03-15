@@ -1,0 +1,22 @@
+# Use a minimal base image with necessary dependencies
+FROM debian:bullseye-slim
+
+# Set environment variables to avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DISPLAY=:0
+ENV PULSE_SERVER=/tmp/PulseServer
+# Install necessary dependencies and Linphone using apt
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgtk-3-0 \
+    libpulse0 \
+    libssl1.1 \
+    dbus-x11 \
+    pulseaudio \
+    linphone \
+    && rm -rf /var/lib/apt/lists/*  # Remove unnecessary apt-get lists to reduce image size
+
+# Set working directory
+WORKDIR /app
+
+# Set entrypoint to run Linphone
+ENTRYPOINT ["linphone"]
