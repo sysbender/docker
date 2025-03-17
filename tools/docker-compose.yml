@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  tools:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: tools1
+    ports:
+      - "2222:22"   # SSH on port 2222
+      - "8888:80"   # HTTP (whoami) on port 8080
+    environment:
+      - USERNAME=vagrant
+      - PASSWORD=vagrant
+    # volumes:
+    #   - ./data:/data  # Optional volume for persistence (modify as needed)
+    restart: always

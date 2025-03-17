@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  tool1:
+    image: sysbender/tools
+    container_name: tool1
+    networks:
+      ipvlan_network:
+        ipv4_address: 192.168.0.41  # Specify the IP address for the first container
+
+  tool2:
+    image: sysbender/tools
+    container_name: tool2
+    networks:
+      ipvlan_network:
+        ipv4_address: 192.168.0.42  # Specify the IP address for the second container
+
+networks:
+  ipvlan_network:
+    driver: ipvlan
+    driver_opts:
+      parent: eth0   
+      ipvlan_mode: l2
+    ipam:
+      config:
+        - subnet: "192.168.0.0/24"
+          gateway: "192.168.0.1"
