@@ -1,0 +1,10 @@
+name: myansible
+services:
+    ansible:
+        stdin_open: true
+        tty: true
+        volumes:
+            - $(pwd):/ansible
+            - ~/.ssh/id_rsa:/root/id_rsa
+        image: willhallonline/ansible:latest
+        command: /bin/sh

@@ -1,0 +1,22 @@
+services:
+  semaphore:
+    restart: unless-stopped
+    ports:
+      - 8001:3000
+    image: semaphoreui/semaphore:latest
+    volumes:
+      - semaphore-config:/etc/semaphore # config.json location
+      - semaphore-database:/var/lib/semaphore # database.boltdb location (Not required if using mysql or postgres)
+    environment:
+      - SEMAPHORE_DB_DIALECT=bolt
+      - SEMAPHORE_ADMIN_PASSWORD
+      - SEMAPHORE_ADMIN_NAME
+      - SEMAPHORE_ADMIN_EMAIL
+      - SEMAPHORE_ADMIN
+      - TZ=Europe/London
+
+volumes:
+  semaphore-config:
+    driver: local
+  semaphore-database:
+    driver: local
