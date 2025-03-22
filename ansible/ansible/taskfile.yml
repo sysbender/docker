@@ -15,3 +15,12 @@ tasks:
     #gather facts
     cmds:
       - ansible all -m gather_facts
+
+  sudo:
+    cmds:
+      - ansible all -m apt -a update_cache=true --become --ask-become-pass
+
+      
+  install:
+    cmds:
+      -  ansible all -m apt -a name=net-tools --become --ask-become-pass
