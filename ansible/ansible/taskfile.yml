@@ -1,0 +1,17 @@
+version: '3'
+
+tasks:
+  ping:
+    # ping hosts
+    cmds:
+      - ansible all --key-file /root/id_rsa -i /ansible/inventory.ini -m ping
+
+  list:
+    # list hosts
+    cmds:
+      - ansible all --list-hosts
+
+  gather:
+    #gather facts
+    cmds:
+      - ansible all -m gather_facts

@@ -1,10 +1,16 @@
-name: myansible
+name: ansible
 services:
     ansible:
+        container_name: ansible1
         stdin_open: true
         tty: true
         volumes:
-            - $(pwd):/ansible
+            - ./ansible:/ansible
             - ~/.ssh/id_rsa:/root/id_rsa
-        image: willhallonline/ansible:latest
+        #image: willhallonline/ansible:latest
+        build:
+            context: .
+            dockerfile: Dockerfile
+        #user: "${USER_UID}:${USER_GID}" 
+        user: "1000:1000"
         command: /bin/sh

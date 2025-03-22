@@ -34,3 +34,6 @@ use with:
 ```bash
 docker-ansible-cli ansible-playbook -u playbook.yml
 ```
+
+
+# ansible all -i ./inventory.ini -m ping
