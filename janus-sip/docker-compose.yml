@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  janus:
+    container_name: janus
+    image: swmansion/janus-gateway:1.2.3-0
+    environment:
+      - WEBSOCKETS_ENABLED=true
+    #   - WEBSOCKETS_PORT
+    # volumes:
+      #- ./janus:/usr/local/etc/janus
+      # - ./share:/usr/local/share/janus
+
+    ports:
+      - "8088:8088"     # Janus HTTP API
+      - "8188:8188"     # Janus WebSocket API
+      - "10000-10100:10000-10100/udp"  # Media
+    networks:
+      - janus-net
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/html/demos:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    depends_on:
+      - janus
+    networks:
+      - janus-net
+
+networks:
+  janus-net:
+    driver: bridge

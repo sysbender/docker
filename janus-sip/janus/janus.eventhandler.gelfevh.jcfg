@@ -1,0 +1,10 @@
+general: {
+	enabled = false
+	events = "all"
+	backend = ""
+	port = ""
+	protocol = "tcp"
+	max_message_len = 1024
+	compress = true
+	compression = 9
+}

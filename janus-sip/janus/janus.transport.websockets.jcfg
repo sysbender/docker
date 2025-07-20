@@ -1,0 +1,36 @@
+general: {
+	events = true
+	json = "indented"
+	pingpong_trigger = 30
+	pingpong_timeout = 10
+	ws = true
+	ws_port = 8188
+	wss = false
+	wss_port = 8989
+	ws_logging = "err,warn"
+
+	
+	
+	
+	
+	
+}
+
+admin: {
+	admin_ws = false
+	admin_ws_port = 7188
+	admin_wss = false
+	admin_wss_port = 7989
+
+	
+	
+	
+	
+	
+}
+
+certificates: {
+	cert_pem = ""
+	cert_key = ""
+	cert_pwd = ""
+}
