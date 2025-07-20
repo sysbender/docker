@@ -51,12 +51,14 @@
 // in the presented order. The first working server will be used for
 // the whole session.
 //
-var server = null;
-if(window.location.protocol === 'http:')
-	server = "http://" + window.location.hostname + ":8088/janus";
-else
-	server = "https://" + window.location.hostname + ":8089/janus";
-
+// var server = null;
+// if(window.location.protocol === 'http:')
+// 	server = "http://" + window.location.hostname + ":8088/janus";
+// else
+// 	server = "https://" + window.location.hostname + ":8089/janus";
+//var server = "/janus";
+var server = "ws://" + window.location.hostname;
+console.log("MyJanusServer Janus server: " + server);
 // When creating a Janus object, we can also specify which STUN/TURN
 // servers we'd like to use to gather additional candidates. This is
 // done by passing an "iceServers" property when creating the Janus

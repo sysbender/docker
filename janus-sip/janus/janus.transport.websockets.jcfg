@@ -10,6 +10,8 @@ general: {
 	ws_logging = "err,warn"
 
 	
+	ws_interface = "eth0"
+	
 	
 	
 	
