@@ -8,7 +8,7 @@ services:
       - WEBSOCKETS_ENABLED=true
       - WEBSOCKETS_INTERFACE=eth0
       - DEBUG_LEVEL=7
-      - GATEWAY_IP=135.19.94.243
+      - GATEWAY_IP=${JANUS_GATEWAY_IP}
 
     # volumes:
     #   - ./janus:/usr/local/etc/janus
@@ -28,8 +28,10 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/html:/usr/share/nginx/html
+      - ./certs:/etc/nginx/ssl
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - janus
     networks:

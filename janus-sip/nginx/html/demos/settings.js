@@ -57,7 +57,7 @@
 // else
 // 	server = "https://" + window.location.hostname + ":8089/janus";
 //var server = "/janus";
-var server = "ws://" + window.location.hostname;
+var server = "wss://" + window.location.hostname;
 console.log("MyJanusServer Janus server: " + server);
 // When creating a Janus object, we can also specify which STUN/TURN
 // servers we'd like to use to gather additional candidates. This is

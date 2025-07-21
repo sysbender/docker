@@ -1,5 +1,5 @@
-cd ~
-mkdir certs
+
+mkdir ./certs
 cd certs
 # Gen ssl certs:
 openssl req -new -newkey rsa:4096 -nodes -keyout key.pem -out cert.csr \
