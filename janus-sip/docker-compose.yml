@@ -7,7 +7,8 @@ services:
     environment:
       - WEBSOCKETS_ENABLED=true
       - WEBSOCKETS_INTERFACE=eth0
-      - WEBSOCKETS_LOGGING=info
+      - DEBUG_LEVEL=7
+      - GATEWAY_IP=135.19.94.243
 
     # volumes:
     #   - ./janus:/usr/local/etc/janus
@@ -16,7 +17,7 @@ services:
     ports:
       - "8088:8088"     # Janus HTTP API
       - "8188:8188"     # Janus WebSocket API
-      - "10000-10100:10000-10100/udp"  # Media
+      # - "10000-10100:10000-10100/udp"  # Media
     networks:
       - janus-net
 
@@ -33,6 +34,21 @@ services:
       - janus
     networks:
       - janus-net
+
+  asterisk:
+    image: andrius/asterisk:latest
+    container_name: asterisk
+    ports:
+      - "5060:5060/udp"
+      - "5060:5060/tcp"
+      # - "10000-10100:10000-10100/udp"
+    volumes:
+      - ./asterisk/pjsip.conf:/etc/asterisk/pjsip.conf
+      - ./asterisk/extensions.conf:/etc/asterisk/extensions.conf
+    restart: unless-stopped
+    networks:
+      - janus-net
+
 
 networks:
   janus-net:
